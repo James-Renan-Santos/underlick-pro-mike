@@ -9,9 +9,9 @@
     body {
       margin: 0;
       font-family: 'Courier New', monospace;
-      background: #000 url("assets/atras.gif") no-repeat center center fixed;
+      background: #000 url("atras.gif") no-repeat center center fixed;
       background-size: cover;
-      color: white;
+      color: #fff;
     }
     .container { display: flex; flex-direction: row; height: 100vh; }
     .column { padding: 20px; overflow-y: auto; }
@@ -20,6 +20,7 @@
       background-color: rgba(0, 0, 0, 0.6);
       text-align: center;
       position: relative;
+      border-right: 2px solid rgba(255,255,255,.15);
     }
     .middle-column {
       width: 50%;
@@ -31,23 +32,28 @@
       border-left: 2px solid rgba(255, 255, 255, 0.2);
       border-right: 2px solid rgba(255, 255, 255, 0.2);
     }
-    .right-column { width: 30%; background-color: rgba(0, 0, 0, 0.6); }
+    .right-column {
+      width: 30%;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-left: 2px solid rgba(255,255,255,.15);
+    }
 
     #loveDisplay, #lovePerSec {
       font-size: 20px; margin: 10px 0; background: rgba(0,0,0,0.6);
       padding: 10px; border-radius: 8px;
     }
 
-   
     #heart { cursor: pointer; transition: transform .1s; margin: 12px 0 6px; user-select: none; display: inline-block; }
     #heart:hover { transform: scale(1.1); }
     #heart img { height: 100px; width: auto; display: block; }
 
-   
-    #effectBar { width: 80%; height: 10px; background: red; margin: 10px auto 4px; border-radius: 5px; display: none; overflow: hidden; }
-    #effectMsg { font-size: 12px; color: #ff8080; min-height: 16px; margin-bottom: 10px; }
+    #effectBar {
+      width: 80%; height: 10px; background: linear-gradient(90deg, #ff3b3b, #ff9a00);
+      margin: 10px auto 4px; border-radius: 5px; display: none; overflow: hidden;
+      box-shadow: 0 0 12px rgba(255,154,0,.35), inset 0 0 6px rgba(0,0,0,.8);
+    }
+    #effectMsg { font-size: 12px; color: #ffb5a5; min-height: 16px; margin-bottom: 10px; text-transform: uppercase; letter-spacing: .3px; }
 
-    
     #musicToggle {
       margin: 6px auto 0;
       padding: 6px 10px;
@@ -61,52 +67,65 @@
     }
     #musicToggle:hover { filter: brightness(1.08); }
 
-    
-    .scenario { position: relative; margin-bottom: 20px; }
-    .scenario img.bg { width: 100%; max-width: 300px; border-radius: 10px; }
+    .scenario { position: relative; margin: 18px 0 22px; }
+    .scenario img.bg { width: 100%; max-width: 300px; border-radius: 10px; border: 2px solid rgba(255,255,255,.15); }
     .scenario .characters { position: absolute; top: 0; left: 0; display: flex; flex-wrap: wrap; gap: 5px; padding: 10px; }
     .scenario .characters img { height: 50px; }
 
-    
     #storeMenu {
       display: flex; gap: 10px; flex-wrap: wrap;
       background: rgba(255,255,255,.08); padding: 10px; border-radius: 8px; margin-bottom: 15px;
+      border: 1px solid rgba(255,255,255,.15);
     }
     .icon-btn { background: transparent; border: none; padding: 4px; cursor: pointer; }
     .effect-icon {
       width: 28px; height: 28px; display: block; border-radius: 6px;
       background: rgba(255,255,255,.06); padding: 4px;
       transition: transform .15s ease, filter .15s ease, background .15s ease;
+      border: 1px solid rgba(255,255,255,.12);
     }
     .icon-btn:hover .effect-icon { transform: scale(1.08); filter: brightness(1.1); background: rgba(255,255,255,.12); }
 
-    
-    #upgrades { background: rgba(0,0,0,.35); border: 1px solid rgba(255,255,255,.2); border-radius: 10px; padding: 8px; }
+    #upgrades {
+      background: rgba(0,0,0,.35);
+      border: 1px solid rgba(255,255,255,.2);
+      border-radius: 10px;
+      padding: 8px;
+      backdrop-filter: blur(2px);
+    }
+    .upgrade-head,
+    .upgrade-row {
+      display: grid;
+      grid-template-columns: 1.6fr .9fr 1fr .8fr .9fr;
+      gap: 10px; align-items: center;
+    }
     .upgrade-head {
-      display: grid; grid-template-columns: 1.6fr .9fr 1fr .8fr .9fr; gap: 10px; align-items: center;
-      padding: 10px 14px; margin-bottom: 8px; border-radius: 8px;
-      background: #0a0a0a; border: 3px solid #ff9a00; box-shadow: inset 0 0 0 3px #000, 0 0 10px rgba(255,154,0,.25);
-      color: #ffe08a; text-transform: uppercase; letter-spacing: .5px; font-weight: 700;
+      padding: 12px 14px; margin-bottom: 6px; border-radius: 10px;
+      background: #0a0a0a; border: 3px solid #ff9a00;
+      color: #ffe08a; text-transform: uppercase; font-weight: 800;
+      position: sticky; top: 0; z-index: 2;
     }
     .upgrade-row {
-      display: grid; grid-template-columns: 1.6fr .9fr 1fr .8fr .9fr; gap: 10px; align-items: center;
-      padding: 12px 14px; margin-bottom: 8px; border-radius: 8px;
-      background: linear-gradient(#090909, #0f0f0f); border: 3px solid #ff9a00;
-      box-shadow: inset 0 0 0 3px #000, 0 0 12px rgba(255,154,0,.22); color: #ffe08a;
-      transition: filter .12s, transform .04s, border-color .12s;
+      padding: 12px 14px;
+      background: linear-gradient(#090909, #0f0f0f);
+      color: #ffe08a;
+      border-left: 3px solid #ff9a00;
+      border-right: 3px solid #ff9a00;
+      position: relative;
     }
-    .upgrade-row:hover { filter: brightness(1.06); border-color: #ffb347; }
-    .upgrade-row:active { transform: translateY(1px); }
-    .upgrade-row .col-name { color: #ffa726; font-weight: 800; text-transform: uppercase; letter-spacing: .5px; }
-    .upgrade-row.can-buy  { box-shadow: inset 0 0 0 3px #000, 0 0 14px rgba(156,255,156,.25); }
-    .upgrade-row.cant-buy { opacity: .78; }
+    .upgrade-row + .upgrade-row::before {
+      content: ""; position: absolute; left: 0; right: 0; top: -1px; height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+    }
+    .upgrade-row:hover { filter: brightness(1.06); }
+    .upgrade-row .col-name { color: #ffa726; font-weight: 800; }
+    .upgrade-row.can-buy  { box-shadow: 0 0 14px rgba(156,255,156,.25); border-color: #7dff7d; }
+    .upgrade-row.cant-buy { opacity: .86; }
     .buy-btn {
       background: #ff9a00; color: #1a1a1a; border: 2px solid #ffd56b; padding: 8px 10px; border-radius: 6px;
-      font-weight: 800; text-transform: uppercase; letter-spacing: .5px; cursor: pointer; transition: filter .12s, transform .04s; font-family: inherit;
+      font-weight: 800; text-transform: uppercase; cursor: pointer;
     }
-    .buy-btn:hover { filter: brightness(1.07); }
-    .buy-btn:active { transform: translateY(1px); }
-    .buy-btn:disabled { background: #4a4a4a; color: #cfcfcf; border-color: #7a7a7a; cursor: not-allowed; filter: none; }
+    .buy-btn:disabled { background: #4a4a4a; color: #cfcfcf; border-color: #7a7a7a; cursor: not-allowed; }
   </style>
 </head>
 <body>
@@ -115,9 +134,8 @@
       <div id="loveDisplay">LOVE: <span id="loveCount">0</span></div>
       <div id="lovePerSec">LOVE/s: <span id="lovePerSecond">0</span></div>
 
-      
       <div id="heart" onclick="clickHeart()">
-        <img src="assets/heart-click.png" alt="Coração" />
+        <img src="heart-click.png" alt="Coração" />
       </div>
 
       <button id="musicToggle" onclick="toggleMusic()">🎵 Música: OFF</button>
@@ -129,31 +147,30 @@
     <div class="column middle-column" id="middlePanel"></div>
 
     <div class="column right-column">
-      
       <div id="storeMenu">
         <button class="icon-btn" onclick="activateEffect('heart')" title="Coração">
-          <img class="effect-icon" src="assets/icons/heart.png" alt="Coração">
+          <img class="effect-icon" src="heart.png" alt="Coração">
         </button>
         <button class="icon-btn" onclick="activateEffect('fire')" title="Fogo">
-          <img class="effect-icon" src="assets/icons/fire.png" alt="Fogo">
+          <img class="effect-icon" src="fire.png" alt="Fogo">
         </button>
         <button class="icon-btn" onclick="activateEffect('skull')" title="Caveira">
-          <img class="effect-icon" src="assets/icons/skull.png" alt="Caveira">
+          <img class="effect-icon" src="skull.png" alt="Caveira">
         </button>
         <button class="icon-btn" onclick="activateEffect('flower')" title="Flor">
-          <img class="effect-icon" src="assets/icons/flower.png" alt="Flor">
+          <img class="effect-icon" src="flower.png" alt="Flor">
         </button>
         <button class="icon-btn" onclick="activateEffect('brain')" title="Cérebro">
-          <img class="effect-icon" src="assets/icons/brain.png" alt="Cérebro">
+          <img class="effect-icon" src="brain.png" alt="Cérebro">
         </button>
         <button class="icon-btn" onclick="activateEffect('bow')" title="Arco">
-          <img class="effect-icon" src="assets/icons/bow.png" alt="Arco">
+          <img class="effect-icon" src="bow.png" alt="Arco">
         </button>
         <button class="icon-btn" onclick="activateEffect('trident')" title="Tridente">
-          <img class="effect-icon" src="assets/icons/trident.png" alt="Tridente">
+          <img class="effect-icon" src="trident.png" alt="Tridente">
         </button>
         <button class="icon-btn" onclick="activateEffect('knife')" title="Faca">
-          <img class="effect-icon" src="assets/icons/knife.png" alt="Faca">
+          <img class="effect-icon" src="knife.png" alt="Faca">
         </button>
       </div>
 
@@ -162,16 +179,14 @@
   </div>
 
   <script>
-    
     const sfx = {
-      click  : new Audio('assets/audio/click.mp3'),
-      buy    : new Audio('assets/audio/buy.mp3'),
-      effect : new Audio('assets/audio/effect.mp3'),
-      chara  : new Audio('assets/audio/chara-unlock.mp3') 
+      click  : new Audio('click.mp3'),
+      buy    : new Audio('buy.mp3'),
+      effect : new Audio('effect.mp3'),
+      chara  : new Audio('chara-unlock.mp3')
     };
-    const bgm = new Audio('assets/audio/bg-music.mp3');
+    const bgm = new Audio('bg-music.mp3');
 
-    
     sfx.click.volume  = 0.35;
     sfx.buy.volume    = 0.35;
     sfx.effect.volume = 0.35;
@@ -191,34 +206,29 @@
       }
     }
 
-    
     function playCharaUnlock(){
       const wasPlaying = !bgm.paused;
       if (wasPlaying) bgm.pause();
-      try{
-        sfx.chara.currentTime = 0;
-        sfx.chara.play().catch(()=>{});
-      }catch(e){}
-      sfx.chara.onended = () => {
-        if (wasPlaying) bgm.play().catch(()=>{});
-      };
+      sfx.chara.currentTime = 0;
+      sfx.chara.play().catch(()=>{});
+      sfx.chara.onended = () => { if (wasPlaying) bgm.play().catch(()=>{}); };
     }
 
-    
     let love = 0;
     let lovePerSecond = 0;
     let clickPower = 1;
+    let costMultiplier = 1;
 
     const characterData = {
-      frisk:   { img: 'assets/char_frisk.png',   bg: 'assets/bg_frisk.jpeg'   },
-      toriel:  { img: 'assets/char_toriel.png',  bg: 'assets/bg_toriel.jpeg'  },
-      sans:    { img: 'assets/char_sans.png',    bg: 'assets/bg_sans.jpeg'    },
-      papyrus: { img: 'assets/char_papyrus.png', bg: 'assets/bg_papyrus.jpeg' },
-      undyne:  { img: 'assets/char_undyne.png',  bg: 'assets/bg_undyne.jpeg'  },
-      alphys:  { img: 'assets/char_alphys.png',  bg: 'assets/bg_alphys.jpeg'  },
-      mettaton:{ img: 'assets/char_mettaton.png',bg: 'assets/bg_mettaton.jpeg' },
-      asgore:  { img: 'assets/char_asgore.png',  bg: 'assets/bg_asgore.jpeg'  },
-      chara:   { img: 'assets/char_chara.png',   bg: 'assets/bg_chara.jpeg'   }
+      frisk:   { img: 'char_frisk.png',   bg: 'bg_frisk.jpeg'   },
+      toriel:  { img: 'char_toriel.png',  bg: 'bg_toriel.jpeg'  },
+      sans:    { img: 'char_sans.png',    bg: 'bg_sans.jpeg'    },
+      papyrus: { img: 'char_papyrus.png', bg: 'bg_papyrus.jpeg' },
+      undyne:  { img: 'char_undyne.png',  bg: 'bg_undyne.jpeg'  },
+      alphys:  { img: 'char_alphys.png',  bg: 'bg_alphys.jpeg'  },
+      mettaton:{ img: 'char_mettaton.png',bg: 'bg_mettaton.jpeg' },
+      asgore:  { img: 'char_asgore.png',  bg: 'bg_asgore.jpeg'  },
+      chara:   { img: 'char_chara.png',   bg: 'bg_chara.jpeg'   }
     };
 
     const upgrades = [
@@ -243,6 +253,11 @@
       setTimeout(()=>{ if(el.textContent===txt) el.textContent=''; }, 1800);
     }
 
+    function getCurrentCost(id){
+      const st = state[id];
+      return Math.floor(st.baseCost * Math.pow(1.15, st.qty) * costMultiplier);
+    }
+
     function clickHeart() {
       love += clickPower;
       playSfx(sfx.click);
@@ -252,16 +267,17 @@
     function buyUpgrade(id) {
       const up = upgrades.find(u => u.id === id);
       const st = state[id];
-      if (love >= st.cost) {
-        love -= st.cost;
+      const price = getCurrentCost(id);
+
+      if (love >= price) {
+        love -= price;
         st.qty++;
         lovePerSecond += up.lps;
-        st.cost = Math.floor(st.cost * 1.15);
         playSfx(sfx.buy);
         updateDisplay();
 
         if (!scenarioMap[id]) createScenario(id);
-        if (scenarioMap[id].count < 20) addCharacterToScenario(id); 
+        if (scenarioMap[id].count < 20) addCharacterToScenario(id);
       }
     }
 
@@ -293,7 +309,8 @@
       const step = 100;
       const timer = setInterval(()=>{
         elapsed += step;
-        bar.style.width = `${100 - (elapsed / durationMs * 100)}%`;
+        const pct = Math.max(0, 100 - (elapsed / durationMs * 100));
+        bar.style.width = pct + '%';
         if(elapsed >= durationMs){
           clearInterval(timer);
           bar.style.display = 'none';
@@ -305,109 +322,28 @@
     function activateEffect(type) {
       const qty = id => state[id]?.qty || 0;
       const activate = (duration, effectFn, reverseFn) => {
-        effectFn(); startEffectBar(duration); setTimeout(() => reverseFn && reverseFn(), duration);
+        effectFn();
+        startEffectBar(duration);
+        setTimeout(() => { reverseFn && reverseFn(); updateDisplay(); }, duration);
       };
 
       if (type === 'heart' && qty('frisk') >= conditions.heart) {
         conditions.heart *= 2; showMsg('Efeito: clique x2 (10s)'); playSfx(sfx.effect);
-        activate(10000, () => clickPower *= 2, () => { clickPower /= 2; });
+        activate(10000, () => { clickPower *= 2; }, () => { clickPower /= 2; });
+
       } else if (type === 'fire' && qty('toriel') >= conditions.fire) {
         conditions.fire *= 2; showMsg('Efeito: LOVE/s x2 (15s)'); playSfx(sfx.effect);
-        activate(15000, () => lovePerSecond *= 2, () => { lovePerSecond /= 2; updateDisplay(); });
+        activate(15000, () => { lovePerSecond *= 2; }, () => { lovePerSecond /= 2; });
+
       } else if (type === 'skull' && qty('sans') >= conditions.skull) {
         love += 1000; conditions.skull *= 2; showMsg('+1000 LOVE'); playSfx(sfx.effect); updateDisplay();
+
       } else if (type === 'flower' && qty('papyrus') >= conditions.flower) {
         conditions.flower *= 2; showMsg('Custos /2 (10s)'); playSfx(sfx.effect);
-        activate(10000, () => { upgrades.forEach(u => state[u.id].cost /= 2); updateDisplay(); },
-                         () => { upgrades.forEach(u => state[u.id].cost *= 2); updateDisplay(); });
+        activate(10000, () => { costMultiplier *= 0.5; }, () => { costMultiplier *= 2; });
+
       } else if (type === 'brain' && qty('alphys') >= conditions.brain) {
         lovePerSecond += 50; conditions.brain *= 2; showMsg('+50 LOVE/s (perm.)'); playSfx(sfx.effect); updateDisplay();
+
       } else if (type === 'bow' && qty('undyne') >= conditions.bow) {
-        conditions.bow *= 2; showMsg('LOVE/s x2 (10s)'); playSfx(sfx.effect);
-        activate(10000, () => lovePerSecond *= 2, () => { lovePerSecond /= 2; updateDisplay(); });
-      } else if (type === 'trident' && qty('asgore') >= conditions.trident) {
-        love += 3000; lovePerSecond += 300; conditions.trident *= 2; showMsg('+3000 LOVE e +300 LOVE/s (30s)'); playSfx(sfx.effect);
-        activate(30000, () => {}, () => { lovePerSecond -= 300; updateDisplay(); });
-        updateDisplay();
-      } else if (type === 'knife') {
-        const all = upgrades.filter(u => u.id !== 'chara').every(u => qty(u.id) >= 1);
-        if (love >= 66666 && all) {
-          showMsg('Chara desbloqueado!');
-          playCharaUnlock(); 
-
-          
-          const charaRow = document.getElementById('charaRow');
-          if (charaRow) {
-            charaRow.style.display = ''; 
-          }
-        } else {
-          showMsg('Condição não atendida');
-        }
-      } else {
-        showMsg('Condição não atendida');
-      }
-    }
-
-    
-    function initUpgrades() {
-      const container = document.getElementById('upgrades');
-      container.innerHTML = '';
-
-      const head = document.createElement('div');
-      head.className = 'upgrade-head';
-      head.innerHTML = `<div>Item</div><div>LOVE/s</div><div>Custo</div><div>Qtd</div><div>Ação</div>`;
-      container.appendChild(head);
-
-      upgrades.forEach(up => {
-        state[up.id] = { qty: 0, cost: up.cost };
-
-        const row = document.createElement('div');
-        row.className = 'upgrade-row cant-buy';
-        row.id = up.id + 'Row'; 
-        row.innerHTML = `
-          <div class="col-name">${up.name}</div>
-          <div class="col-lps">+${up.lps}/s</div>
-          <div class="col-cost"><span id="${up.id}Cost">${up.cost}</span></div>
-          <div class="col-qty"><span id="${up.id}Qty">0</span></div>
-          <div class="col-action"><button class="buy-btn" id="${up.id}Buy">Comprar</button></div>
-        `;
-        row.querySelector('#' + up.id + 'Buy').onclick = () => buyUpgrade(up.id);
-
-        
-        if (up.hidden) row.style.display = 'none';
-
-        container.appendChild(row);
-      });
-
-      updateDisplay();
-    }
-
-    function updateDisplay() {
-      document.getElementById('loveCount').textContent = Math.floor(love);
-      document.getElementById('lovePerSecond').textContent = Math.floor(lovePerSecond);
-
-      upgrades.forEach(up => {
-        const st   = state[up.id];
-        const qtyE = document.getElementById(`${up.id}Qty`);
-        const cosE = document.getElementById(`${up.id}Cost`);
-        if (qtyE) qtyE.textContent = st.qty;
-        if (cosE) cosE.textContent = Math.floor(st.cost);
-
-        const row = document.getElementById(`${up.id}Row`);
-        const btn = document.getElementById(`${up.id}Buy`);
-        if (row && btn) {
-          const can = love >= st.cost;
-          row.classList.toggle('can-buy',  can);
-          row.classList.toggle('cant-buy', !can);
-          btn.disabled = !can;
-        }
-      });
-    }
-
-    
-    setInterval(() => { love += lovePerSecond; updateDisplay(); }, 1000);
-
-    initUpgrades();
-  </script>
-</body>
-</html>
+        conditions.bow *= 2; showMsg('LOVE/s x2 (10s)
